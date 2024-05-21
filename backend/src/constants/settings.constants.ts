@@ -1,0 +1,3 @@
+export const DEFAULT_WORK_INTERVAL = 50;
+export const DEFAULT_BREAK_INTERVAL = 10;
+export const DEFAULT_INTERVAL_COUNT = 7;

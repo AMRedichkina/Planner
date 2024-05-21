@@ -1,0 +1,46 @@
+.table {
+  @apply w-full;
+}
+.table .header {
+  @apply grid grid-cols-[1.4fr_.4fr_.4fr_.1fr];
+}
+.table .header,
+.table .parentsWrapper .row,
+.table .parentsWrapper .colHeading {
+  @apply rounded border-t border-border text-left w-auto whitespace-nowrap;
+}
+.table .header > div,
+.table .parentsWrapper .row > div,
+.table .parentsWrapper .colHeading > div {
+  @apply border-r border-border py-2 px-4;
+}
+.table .header > div:last-child,
+.table .parentsWrapper .row > div:last-child,
+.table .parentsWrapper .colHeading > div:last-child {
+  @apply border-0;
+}
+.table .parentsWrapper .colHeading {
+  @apply hover:bg-transparent;
+  background-color: #0e0f0f;
+}
+.table .parentsWrapper .colHeading > div {
+  @apply font-semibold text-xl py-3;
+}
+.table .parentsWrapper .addRow {
+  @apply py-2 px-4 border-t border-border;
+}
+.table .parentsWrapper .row {
+  @apply font-normal grid grid-cols-[1.4fr_.4fr_.4fr_.1fr] relative;
+}
+.table .parentsWrapper .row.completed > div > span > input {
+  @apply italic line-through opacity-50;
+}
+.table .parentsWrapper .row:hover {
+  @apply bg-[#1c1f1f];
+}
+.table .parentsWrapper .row > div > span .grip {
+  @apply opacity-20 transition-opacity -ml-3 -mr-1;
+}
+.table .parentsWrapper .row > div > span .grip:hover, .table .parentsWrapper .row > div > span .grip:active {
+  @apply opacity-100;
+}/*# sourceMappingURL=ListView.module.css.map */

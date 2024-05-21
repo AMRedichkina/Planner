@@ -1,0 +1,32 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "logo header"
+        "sidebar main"
+        "footer main";
+    height: 100vh;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.logo {
+    grid-area: logo;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.main {
+    grid-area: main;
+}
+
+.footer {
+    grid-area: footer;
+}
