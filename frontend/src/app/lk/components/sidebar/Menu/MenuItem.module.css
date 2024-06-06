@@ -1,0 +1,17 @@
+.menuItemLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menuItemBox {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.menuItemBoxHover:hover {
+    background-color: #ffffff1a;
+}

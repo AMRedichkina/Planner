@@ -1,6 +1,6 @@
 import { DropResult } from '@hello-pangea/dnd'
 
-import { FILTERS } from '../columns.data'
+import { FILTERS } from '../dataFilters/columns.data'
 
 import { useUpdateTask } from './useUpdateTask'
 import { useCallback } from 'react'

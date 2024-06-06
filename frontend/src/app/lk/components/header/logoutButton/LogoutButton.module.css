@@ -1,0 +1,7 @@
+.logoutButton {
+    transition: opacity 0.3s;
+}
+
+.logoutButton:hover {
+    opacity: 1;
+}

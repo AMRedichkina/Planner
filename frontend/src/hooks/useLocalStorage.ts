@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
 interface IUseLocalStorage<T> {
 	key: string
@@ -38,6 +39,25 @@ export function useLocalStorage<T>({
 			isMounted.current = true
 		}
 	}, [key, value])
+
+	useEffect(() => {
+		const handleStorageChange = (event: StorageEvent) => {
+			if (event.key === key) {
+				try {
+					const newValue = JSON.parse(event.newValue!) ?? defaultValue;
+					setValue(newValue);
+				} catch (error) {
+					console.error(`Error parsing localStorage value: ${error}`);
+				}
+			}
+		};
+
+		window.addEventListener("storage", handleStorageChange);
+
+		return () => {
+			window.removeEventListener("storage", handleStorageChange)
+		};
+	}, [defaultValue, key]);
 
 	return [value, setValue, isLoading]
 }

@@ -9,7 +9,7 @@ import { Container, IconButton, InputAdornment } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { toast } from 'sonner';
 import { IAuthForm } from '@/types/auth.types';
-import { DASHBOARD_PAGES } from '@/config/pages-url.config';
+import { DASHBOARD_PAGES } from '@/configs/pages-url.config';
 import { authService } from '@/services/auth.service';
 import { validationSchema } from '../../validation/validationSchema';
 import ThemeProvider from '@/components/ThemeProvider';

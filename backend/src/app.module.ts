@@ -20,4 +20,5 @@ import { AnalyticsModule } from './analytics/analytics.module';
     AnalyticsModule
   ],
 })
+
 export class AppModule { }

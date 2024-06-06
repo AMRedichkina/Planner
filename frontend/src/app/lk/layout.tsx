@@ -1,7 +1,21 @@
-import type { PropsWithChildren } from 'react'
+import React from 'react';
+import type { ReactNode } from 'react';
+import styles from './layout.module.scss';
 
-import DashboardLayout from '@/components/dashboard-layout/DashboardLayout'
+import { Header } from './components/header/Header';
+import { Sidebar } from './components/sidebar/Sidebar';
+import { Logo } from './components/logo/Logo';
+import { Footer } from './components/footer/Footer';
 
-export default function Layout({ children }: PropsWithChildren<unknown>) {
-	return <DashboardLayout>{children}</DashboardLayout>
+
+export default function DashboardLayout({ children }: { children: ReactNode }) {
+	return (
+		<main className={styles.dashboard}>
+			<Logo className={styles.logo} />
+			<Header className={styles.header} />
+			<Sidebar className={styles.sidebar} />
+			<div className={`${styles.main} ${styles.title}`}>{children}</div>
+			<Footer className={styles.footer} />
+		</main>
+	);
 }

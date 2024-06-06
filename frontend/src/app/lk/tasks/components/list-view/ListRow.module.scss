@@ -1,0 +1,41 @@
+.listRow {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50px;
+
+    &.completed {
+        * {
+            text-decoration: line-through;
+        }
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-grow: 1;
+    }
+
+    .date {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-grow: 1;
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .capitalize {
+        text-transform: capitalize;
+    }
+
+    .deleteButton {
+        display: flex;
+        align-items: center;
+    }
+}

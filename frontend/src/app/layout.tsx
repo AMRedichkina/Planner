@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google'
+import { Noto_Serif } from 'next/font/google'
 import { Toaster } from 'sonner'
 
 import { SITE_NAME } from '@/constants/seo.constants'
 
 import './globals.scss'
 import { Providers } from './providers'
+import ThemeProvider from './theme-provider'
 
-const zen = Noto_Sans({
-	subsets: ['cyrillic', 'latin'],
-	weight: ['300', '400', '500', '600', '700'],
+
+const zen = Noto_Serif({
+	subsets: ['latin'],
+	weight: ['400', '700'],
 	display: 'swap',
 	variable: '--font-zen',
 	style: ['normal'],
@@ -32,10 +34,9 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={zen.className}>
 				<Providers>
-					{children}
-
+					<ThemeProvider>{children}</ThemeProvider>
 					<Toaster
-						theme='dark'
+						theme='light'
 						position='bottom-right'
 						duration={1500}
 					/>

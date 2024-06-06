@@ -1,0 +1,17 @@
+.profileContainer {
+    position: absolute;
+    top: var(--big-layout);
+    right: var(--big-layout);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.textContainer {
+    text-align: right;
+}
+
+.whiteAvatar {
+    background-color: white;
+    color: var(--tuapeGrayDark);
+}
