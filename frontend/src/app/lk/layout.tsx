@@ -4,14 +4,12 @@ import styles from './layout.module.scss';
 
 import { Header } from './components/header/Header';
 import { Sidebar } from './components/sidebar/Sidebar';
-import { Logo } from './components/logo/Logo';
 import { Footer } from './components/footer/Footer';
 
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
 	return (
 		<main className={styles.dashboard}>
-			<Logo className={styles.logo} />
 			<Header className={styles.header} />
 			<Sidebar className={styles.sidebar} />
 			<div className={`${styles.main} ${styles.title}`}>{children}</div>

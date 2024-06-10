@@ -4,7 +4,7 @@ import { IMenuItem } from './menu.interface';
 import styles from './MenuItem.module.css';
 import { COLORS } from '@/constants/color.constants';
 
-export function MenuItem({ item }: { item: IMenuItem }) {
+export function MenuItem({ item, iconOnly }: { item: IMenuItem, iconOnly?: boolean; }) {
 	const IconComponent = item.icon;
 	return (
 		<Box my={1}>
@@ -12,8 +12,8 @@ export function MenuItem({ item }: { item: IMenuItem }) {
 				<Box
 					className={`${styles.menuItemBox} ${styles.menuItemBoxHover}`}
 				>
-					<IconComponent sx={{ color: COLORS.tuapeGrayDark, fontSize: 28 }} />
-					<Typography sx={{ color: COLORS.tuapeGrayDark, fontSize: '1.2rem' }}>{item.name}</Typography>
+					<IconComponent />
+					{!iconOnly && <Typography>{item.name}</Typography>}
 				</Box>
 			</Link>
 		</Box>

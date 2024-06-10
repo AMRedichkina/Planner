@@ -5,7 +5,7 @@ import { LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { IconButton } from '@mui/material'
 import { COLORS } from '@/constants/color.constants'
-import styles from './LogoutButton.module.css';
+import styles from './LogoutButton.module.scss';
 
 import { authService } from '@/services/auth.service'
 

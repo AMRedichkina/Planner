@@ -11,12 +11,10 @@ import { ListView } from './list-view/ListView'
 export type TypeView = 'list' | 'kanban'
 
 export function TasksView() {
-	const [type, setType, isLoading] = useLocalStorage<TypeView>({
+	const [type, setType] = useLocalStorage<TypeView>({
 		key: 'view-type',
 		defaultValue: 'list'
 	})
-
-	if (isLoading) return <Loader />
 
 	return (
 		<div>

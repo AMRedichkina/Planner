@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default function AuthPage() {
     return (
         <>
-            <Background />
             <Auth />
         </>
     );

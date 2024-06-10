@@ -1,5 +1,6 @@
-import ThemeSwitcher from './ThemeSwitcher';
-import { Profile } from './profile/Profile'
+import ThemeSwitcher from './components/themeSwitcher/ThemeSwitcher'
+import { Profile } from './components/profile/Profile'
+import { Box } from '@mui/material';
 
 type HeaderProps = {
 	className?: string;
@@ -7,9 +8,9 @@ type HeaderProps = {
 
 export const Header: React.FC<HeaderProps> = ({ className }) => {
 	return (
-		<header>
-			<ThemeSwitcher />
-			<Profile />
-		</header>
+			<Box className={`${className}`}>
+				<Profile />
+				<ThemeSwitcher />
+			</Box>	
 	)
 }

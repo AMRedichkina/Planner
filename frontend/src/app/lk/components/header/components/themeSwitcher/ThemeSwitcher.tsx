@@ -1,25 +1,26 @@
 'use client'
 
-import React, { useContext } from 'react';
-// import { ThemeContext } from '../../../theme-provider'
+import React from 'react';
 import { useApplicationConfigs } from '@/contexts/ApplicationConfigsContext'
-import { Switch, FormControlLabel } from '@mui/material';
+import { Box, Switch} from '@mui/material'
+import styles from './ThemeSwitcher.module.scss'
+import { WbSunny, NightsStay } from '@mui/icons-material';
+
 
 const ThemeSwitcher = () => {
-    // const { theme, changeContext } = useContext(ThemeContext)
     const { theme, changeTheme } = useApplicationConfigs();
     return (
-        <FormControlLabel
-            control={
-                <Switch
+        <Box className={styles.profileContainer}>
+            <Switch
                     checked={theme === 'dark'}
                     onChange={changeTheme}
                     name="themeSwitch"
                     color="primary"
+                    icon={<WbSunny />}
+                    checkedIcon={<NightsStay />} 
                 />
-            }
-            label={theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-        />
+        </Box>
+        
     );
 };
 

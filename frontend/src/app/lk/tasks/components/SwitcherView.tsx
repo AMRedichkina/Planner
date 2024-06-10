@@ -1,9 +1,10 @@
 'use client'
 
-import cn from 'clsx'
-import { Kanban, ListTodo } from 'lucide-react'
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewKanbanIcon from '@mui/icons-material/ViewKanban';
 
 import type { TypeView } from './TasksView'
+import { Button, Typography } from '@mui/material';
 
 interface ISwitcherView {
 	type: TypeView
@@ -11,26 +12,17 @@ interface ISwitcherView {
 }
 
 export function SwitcherView({ setType, type }: ISwitcherView) {
-	return (
-		<div className='flex items-center gap-4 mb-5'>
-			<button
-				className={cn('flex items-center gap-1', {
-					'opacity-40': type === 'kanban'
-				})}
-				onClick={() => setType('list')}
-			>
-				<ListTodo />
-				List
-			</button>
-			<button
-				className={cn('flex items-center gap-1', {
-					'opacity-40': type === 'list'
-				})}
-				onClick={() => setType('kanban')}
-			>
-				<Kanban />
-				Board
-			</button>
-		</div>
-	)
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <Button
+        onClick={() => setType('list')}
+        startIcon={<ViewListIcon />}
+      />
+      <Typography variant="subtitle1" color="textSecondary">/</Typography>
+      <Button
+        onClick={() => setType('kanban')}
+        startIcon={<ViewKanbanIcon />}
+      />
+    </div>
+  );
 }
