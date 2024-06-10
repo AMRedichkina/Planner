@@ -1,8 +1,6 @@
 services:
   postgres:
     image: postgres:12
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -14,14 +12,13 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    volumes:
-      - ./server:/usr/src/app
     environment:
       DATABASE_URL: ${DATABASE_URL}
     ports:
       - "3001:3001"
     depends_on:
       - postgres
+    command: ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
 
   frontend:
     build:
@@ -36,3 +33,6 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  my-network:

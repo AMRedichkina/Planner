@@ -1,20 +1,10 @@
+
+# development
+
 FROM node:21
 
 WORKDIR /usr/src/app
 
-RUN rm -rf package.json node_modules package-lock.json
-
-COPY package.json ./
-
-RUN npm install -g next
-
-RUN npm install
-
 COPY . .
 
-# prod
-# RUN npm run build
-# CMD ["npm", "start"]
-
-# dev, hot reloading
 CMD ["npm", "run", "dev"]
