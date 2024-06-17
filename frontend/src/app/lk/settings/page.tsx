@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 
 export default function SettingsPage() {
 	return (
-		<div>
+		<>
 			<Heading title='Settings' />
 			<UserSettings />
 			<Settings />
-		</div>
+		</>
 	)
 }

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Priority" AS ENUM ('low', 'medium', 'hight');
+CREATE TYPE "Priority" AS ENUM ('low', 'medium', 'high');
 
 -- CreateTable
 CREATE TABLE "user" (

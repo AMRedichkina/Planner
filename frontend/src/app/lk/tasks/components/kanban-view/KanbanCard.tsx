@@ -1,22 +1,16 @@
 'use client'
 
-import cn from 'clsx'
-import { GripVertical, Loader, Trash } from 'lucide-react'
+import React from 'react'
 import { useEffect, type Dispatch, type SetStateAction } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-
-import Checkbox from '@/components/ui/checkbox'
-import { TransparentField } from '@/components/ui/fields/TransparentField'
-import { SingleSelect } from '@/components/ui/task-edit/SingleSelect'
-import { DatePicker } from '@/components/ui/task-edit/date-picker/DatePicker'
-
 import type { ITaskResponse, TypeTaskFormState } from '@/types/task.types'
-
+import { Card, CardContent, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import dayjs from 'dayjs';
+import { useTheme } from '@mui/material/styles';
 import { useDeleteTask } from '../../hooks/useDeleteTask'
 import { useTaskDebounce } from '../../hooks/useTaskDebounce'
-
-import styles from './KanbanView.module.scss'
-import React from 'react'
 
 interface IKanbanCard {
 	item: ITaskResponse
@@ -24,6 +18,8 @@ interface IKanbanCard {
 }
 
 export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
+  const theme = useTheme();
+
 	useEffect(() => {
 		console.log('KanbanCard re-rendered', item);
 	}, [item]);
@@ -42,73 +38,77 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
 	const { deleteTask, isDeletePending } = useDeleteTask()
 
 	return (
-		<div
-			className={cn(
-				styles.card,
-				{
-					[styles.completed]: watch('isCompleted')
-				},
-				'animation-opacity'
-			)}
-		>
-			<div className={styles.cardHeader}>
-				<button aria-describedby='todo-item'>
-					<GripVertical className={styles.grip} />
-				</button>
-
-				<Controller
-					control={control}
-					name='isCompleted'
-					render={({ field: { value, onChange } }) => (
-						<Checkbox
-							onChange={onChange}
-							checked={value}
-						/>
-					)}
-				/>
-
-				<TransparentField {...register('name')} />
-			</div>
-
-			<div className={styles.cardBody}>
-				<Controller
-					control={control}
-					name='createdAt'
-					render={({ field: { value, onChange } }) => (
-						<DatePicker
-							onChange={onChange}
-							value={value || ''}
-							position='left'
-						/>
-					)}
-				/>
-
-				<Controller
-					control={control}
-					name='priority'
-					render={({ field: { value, onChange } }) => (
-						<SingleSelect
-							data={['high', 'medium', 'low'].map(item => ({
-								value: item,
-								label: item
-							}))}
-							onChange={onChange}
-							value={value || ''}
-						/>
-					)}
-				/>
-			</div>
-
-			<div className={styles.cardActions}>
-				<button
-					onClick={() =>
-						item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))
-					}
-					className='opacity-50 transition-opacity hover:opacity-100'
-				>
-					{isDeletePending ? <Loader size={15} /> : <Trash size={15} />}
-				</button>
-			</div>
-		</div>
+		<Card variant="outlined" sx={{ minWidth: 275, margin: '8px', boxShadow: 3 }}>
+      <CardContent sx={{ '& > div:not(:last-child)': { mb: 2 } }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <IconButton aria-label="drag" disabled>
+            <DragIndicatorIcon />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}              sx={{ marginLeft: 'auto' }}
+          >
+            <DeleteOutlineIcon />
+          </IconButton>
+      </div>
+			<TextField
+        {...register('name')}
+        variant="standard"
+        fullWidth
+        label="Task Name"
+      />
+      <Controller
+				control={control}
+				name='createdAt'
+				render={({ field: { onChange, value, ...restField } }) => (
+          <TextField
+              {...restField}
+              type="date"
+              label="Due Date"
+              InputLabelProps={{ shrink: true }}
+              variant="standard"
+              fullWidth
+              value={value ? dayjs(value).format('YYYY-MM-DD') : ''}
+              onChange={(e) => {
+                  const dateValue = e.target.value;
+                  const isoDate = dateValue ? dayjs(dateValue).toISOString() : '';
+                  onChange(isoDate);
+              }}
+            />
+        )}
+			/>  
+      <Controller
+        name="priority"
+        control={control}
+        render={({ field }) => (
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel >Priority</InputLabel>
+              <Select
+                labelId="priority-label"
+                label="Priority"
+                {...field}
+                onChange={e => field.onChange(e.target.value)}
+              >
+                <MenuItem value="high" style={{ color: theme.palette.error.main }}>High</MenuItem>
+                <MenuItem value="medium" style={{ color: theme.palette.warning.main }}>Medium</MenuItem>
+                <MenuItem value="low" style={{ color: theme.palette.success.main }}>Low</MenuItem>
+              </Select>
+            </FormControl>
+        )}
+      />
+      <Controller
+				control={control}
+				name='isCompleted'
+				render={({ field: { value, onChange } }) => (
+          <FormControlLabel control={
+					  <Checkbox
+						  onChange={onChange}
+						  checked={value}
+					  />
+          } label="Completed" />
+				)}
+			/>
+      </CardContent>
+		</Card>
 	)
 }

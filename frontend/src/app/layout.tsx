@@ -4,7 +4,6 @@ import { Toaster } from 'sonner'
 
 import { SITE_NAME } from '@/constants/seo.constants'
 
-import './globals.scss'
 import { Providers } from './providers'
 import ThemeProvider from './theme-provider'
 

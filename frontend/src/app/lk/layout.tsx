@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 		<main className={styles.dashboard}>
 			<Header className={styles.header} />
 			<Sidebar className={styles.sidebar} />
-			<div className={`${styles.main} ${styles.title}`}>{children}</div>
+			<div className={styles.main}>{children}</div>
 			<Footer className={styles.footer} />
 		</main>
 	);

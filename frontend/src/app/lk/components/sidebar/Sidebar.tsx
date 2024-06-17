@@ -12,10 +12,9 @@ type SidebarProps = {
 
 export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 	const isMobile = useMediaQuery('(max-width:600px)');
-	return (
-		<>{isMobile ?
-			(
-				<Drawer className={className}
+	return (isMobile ?
+			(<div className={className}>
+				<Drawer 
                 variant="permanent"
                 open
                 sx={{
@@ -32,29 +31,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                         <MenuItem item={item} key={item.link} iconOnly={true} />
                     ))}
                 </Box>
-            </Drawer> )
+            </Drawer> 
+			</div>)
 			:	
-			(
-				<Drawer className={className}
+			(<Drawer className={className}
                     variant="permanent"
                     open
                     sx={{
-                        width: 240,
+                        width: '25%',
                         flexShrink: 0,
                         '& .MuiDrawer-paper': {
-                            width: 240,
+                            width: '25%',
                             boxSizing: 'border-box',
                         },
                     }}
                 >
-<Box px={3} py={2} width={100} position='relative'>
-				{MENU.map((item) => (
-					<MenuItem item={item} key={item.link} />
-				))}
-			</Box>
-				</Drawer>
-			)}
-		</>
-		
+					<Box px={3} py={2} width={100} position='relative'>
+						{MENU.map((item) => (
+							<MenuItem item={item} key={item.link} />
+						))}
+					</Box>
+				</Drawer>)
 	)
 }

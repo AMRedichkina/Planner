@@ -1,41 +1,51 @@
-'use client'
+"use client"
 
-import React, { useState, useRef, useEffect } from 'react';
+import * as React from 'react';
+import CircularProgress, {
+  CircularProgressProps,
+} from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
 
-export default function Loading() {
-    const [progress, setProgress] = useState(0);
-    const [buffer, setBuffer] = useState(10);
+function Loading(
+  props: CircularProgressProps & { value: number },
+) {
+  return (
+    <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography
+          variant="caption"
+          component="div"
+          color="text.secondary"
+        >{`${Math.round(props.value)}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
-    const progressRef = useRef(() => { });
-    useEffect(() => {
-        progressRef.current = () => {
-            if (progress > 100) {
-                setProgress(0);
-                setBuffer(10);
-            } else {
-                const diff = Math.random() * 10;
-                const diff2 = Math.random() * 10;
-                setProgress(progress + diff);
-                setBuffer(progress + diff + diff2);
-            }
-        };
-    });
+export default function CircularWithValueLabel() {
+  const [progress, setProgress] = React.useState(10);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            progressRef.current();
-        }, 500);
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-    return (
-        <Box sx={{ width: '100%' }}>
-            <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-        </Box>
-    );
+  return <Loading value={progress} />;
 }

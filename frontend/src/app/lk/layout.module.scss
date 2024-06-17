@@ -1,10 +1,10 @@
 .dashboard {
     display: grid;
-    grid-template-columns: 1fr 1fr 5%;
-    grid-template-rows: 10% 1fr auto;
+    grid-template-columns: 25% 1fr 5%;
+    grid-template-rows: 5% 1fr auto;
     grid-template-areas:
         "sidebar header header"
-        "sidebar main ."
+        "sidebar main main"
         "sidebar footer footer";
     height: 100vh;
     padding: 1rem;
@@ -23,7 +23,15 @@
 
 .sidebar {
     grid-area: sidebar;
+    position: relative;
+
 }
+
+.sidebar, .sidebar a, .sidebar button, .sidebar * {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .main {
     grid-area: main;
@@ -37,6 +45,7 @@
     .dashboard {
         grid-template-columns: 56px 1fr;
         grid-template-areas:
+            ". ."
             "sidebar header"
             "sidebar main"
             "sidebar  footer";
