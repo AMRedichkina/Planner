@@ -38,25 +38,31 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
 	const { deleteTask, isDeletePending } = useDeleteTask()
 
 	return (
-		<Card variant="outlined" sx={{ minWidth: 275, margin: '8px', boxShadow: 3 }}>
-      <CardContent sx={{ '& > div:not(:last-child)': { mb: 2 } }}>
+		<Card variant="outlined" sx={{ maxWidth: 300, margin: '8px', boxShadow: 3, overflow: 'hidden' }}>
+      <CardContent sx={{ padding: '8px', '& > div:not(:last-child)': { mb: 1 } }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          
           <IconButton aria-label="drag" disabled>
             <DragIndicatorIcon />
           </IconButton>
+
           <IconButton
             aria-label="delete"
             onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}              sx={{ marginLeft: 'auto' }}
           >
             <DeleteOutlineIcon />
           </IconButton>
-      </div>
-			<TextField
+        </div>
+
+      <TextField
         {...register('name')}
-        variant="standard"
+        variant="outlined"
         fullWidth
         label="Task Name"
+        size="small"
+        style={{ display: 'block' }} 
       />
+			
       <Controller
 				control={control}
 				name='createdAt'
@@ -66,8 +72,10 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
               type="date"
               label="Due Date"
               InputLabelProps={{ shrink: true }}
-              variant="standard"
+              variant="outlined"
+              size="small"
               fullWidth
+              style={{ display: 'block' }} 
               value={value ? dayjs(value).format('YYYY-MM-DD') : ''}
               onChange={(e) => {
                   const dateValue = e.target.value;
@@ -81,7 +89,7 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
         name="priority"
         control={control}
         render={({ field }) => (
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <FormControl variant="outlined" size="small" style={{ display: 'block' }} >
             <InputLabel >Priority</InputLabel>
               <Select
                 labelId="priority-label"
@@ -96,6 +104,7 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
             </FormControl>
         )}
       />
+
       <Controller
 				control={control}
 				name='isCompleted'

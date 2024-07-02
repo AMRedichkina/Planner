@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Draggable, Droppable } from '@hello-pangea/dnd'
 import type { Dispatch, SetStateAction } from 'react'
 
@@ -10,8 +11,11 @@ import { filterTasks } from '../../dataFilters/filter-tasks'
 
 import { KanbanAddCardInput } from './KanbanAddCardInput'
 import { KanbanCard } from './KanbanCard'
+
+import { Typography } from '@mui/material';
+
 import styles from './KanbanView.module.scss'
-import React, { useEffect } from 'react'
+
 
 interface IKanbanColumn {
 	value: string
@@ -21,20 +25,16 @@ interface IKanbanColumn {
 }
 
 export const KanbanColumn = ({ value, items, label, setItems }: IKanbanColumn) => {
-	useEffect(() => {
-		console.log(`KanbanColumn ${value} re-rendered`);
-	});
-
-
 	return (
 		<Droppable droppableId={value}>
 			{provided => (
 				<div
-					ref={provided.innerRef}
-					{...provided.droppableProps}
-				>
+				ref={provided.innerRef}
+				{...provided.droppableProps}
+			  >
 					<div className={styles.column}>
-						<div className={styles.columnHeading}>{label}</div>
+						<Typography variant="h6">{label}</Typography>
+						
 
 						{filterTasks(items, value)?.map((item, index) => (
 							<Draggable key={item.id || `temp-${index}`} draggableId={item.id || `temp-${index}`} index={index}>

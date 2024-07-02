@@ -1,5 +1,9 @@
 import { type Dispatch, type SetStateAction } from 'react'
 
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
+
 import type { ITaskResponse } from '@/types/task.types'
 
 interface IKanbanAddCardInput {
@@ -8,33 +12,34 @@ interface IKanbanAddCardInput {
 }
 
 export function KanbanAddCardInput({
-	setItems,
-	filterDate
+    setItems,
+    filterDate
 }: IKanbanAddCardInput) {
-	const addCard = () => {
-		setItems(prev => {
-			if (!prev) return
+    const addCard = () => {
+        setItems(prev => {
+            if (!prev) return
 
-			return [
-				...prev,
-				{
-					id: '',
-					name: '',
-					isCompleted: false,
-					createdAt: filterDate
-				}
-			]
-		})
-	}
+            return [
+                ...prev,
+                {
+                    id: '',
+                    name: '',
+                    isCompleted: false,
+                    createdAt: filterDate
+                }
+            ]
+        });
+    }
 
-	return (
-		<div className='mt-5'>
-			<button
-				onClick={addCard}
-				className='italic opacity-40 text-sm'
-			>
-				Add task...
-			</button>
-		</div>
-	)
+    return (
+        <Stack direction="row" spacing={2} sx={{ mt: 1, justifyContent: "left" }}>
+            <Button
+                variant="text"
+                onClick={addCard}
+                sx={{ fontStyle: 'italic', fontSize: '0.875rem' }}
+            >
+                Add task...
+            </Button>
+        </Stack>
+    );
 }

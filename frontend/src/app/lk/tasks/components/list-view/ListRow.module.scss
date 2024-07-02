@@ -1,41 +1,15 @@
 .listRow {
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 50px;
+    margin-top: 1rem;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    gap: .25rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-shadow: inset;
 
-    &.completed {
-        * {
-            text-decoration: line-through;
-        }
-    }
-
-    .content {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-grow: 1;
-    }
-
-    .date {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-grow: 1;
-    }
-
-    .action {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .capitalize {
-        text-transform: capitalize;
-    }
-
-    .deleteButton {
-        display: flex;
-        align-items: center;
+    > * {
+        margin-bottom: 0.5rem;
     }
 }

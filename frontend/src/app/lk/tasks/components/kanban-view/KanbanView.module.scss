@@ -1,13 +1,12 @@
 .board {
 	display: grid;
 	grid-auto-flow: column;
-	gap: 32px; // equivalent to Tailwind's 'gap-8'
+	gap: 32px;
 	width: 100%;
 	overflow-x: auto;
-  
-	.column {
-	  width: 17rem;
-	  white-space: nowrap;
-	  min-height: 79vh;
-	}
+}
+.column {
+	width: 300px;
+	white-space: nowrap;
+	min-height: 79vh;
 }

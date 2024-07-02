@@ -1,11 +1,9 @@
 import React, { Dispatch, SetStateAction, useMemo } from 'react';
-import { Box, IconButton, CircularProgress } from '@mui/material';
+import { Box, IconButton, CircularProgress, TextField, InputLabel, FormControl, Select, MenuItem, useTheme } from '@mui/material';
 import { DragIndicator, Delete } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
 import Checkbox from '@/components/ui/checkbox';
-import { TransparentField } from '@/components/ui/fields/TransparentField';
-import { SingleSelect } from '@/components/ui/task-edit/SingleSelect';
-import { DatePicker } from '@/components/ui/task-edit/date-picker/DatePicker';
+import dayjs from 'dayjs';
 import { ITaskResponse, TypeTaskFormState } from '@/types/task.types';
 import { useDeleteTask } from '../../hooks/useDeleteTask';
 import { useTaskDebounce } from '../../hooks/useTaskDebounce';
@@ -17,6 +15,8 @@ interface IListRow {
 }
 
 export function ListRow({ item, setItems }: IListRow) {
+	const theme = useTheme();
+	
 	const { register, control, watch } = useForm<TypeTaskFormState>({
 		defaultValues: {
 			name: item.name,
@@ -31,63 +31,72 @@ export function ListRow({ item, setItems }: IListRow) {
 	const { deleteTask, isDeletePending } = useDeleteTask();
 	const isCompleted = watch('isCompleted');
 
-	// TODO: save card's style in bd (connected with task)
-	const backgroundColor = useMemo(() => {
-		const colors = [
-			'var(--color-additional-1)',
-			'var(--color-additional-2)',
-			'var(--color-additional-3)',
-			'var(--color-additional-4)',
-			'var(--color-additional-5)',
-			'var(--color-additional-6)'];
-		return colors[Math.floor(Math.random() * colors.length)];
-	}, []);
 
 	return (
-		<Box className={`${styles.listRow} ${isCompleted ? styles.completed : ''}`} style={{ backgroundColor }}>
-			<Box className={styles.content}>
-				<IconButton aria-label="Drag Handle">
-					<DragIndicator />
-				</IconButton>
-				<Controller
-					control={control}
-					name="isCompleted"
-					render={({ field }) => (
-						<Checkbox onChange={field.onChange} checked={field.value} />
-					)}
-				/>
-				<TransparentField {...register('name')} />
-			</Box>
-			<Box className={styles.date}>
-				<Controller
-					control={control}
-					name="createdAt"
-					render={({ field }) => (
-						<DatePicker onChange={field.onChange} value={field.value || ''} />
-					)}
-				/>
-			</Box>
-			<Box className={styles.capitalize}>
-				<Controller
-					control={control}
-					name="priority"
-					render={({ field }) => (
-						<SingleSelect
-							data={['high', 'medium', 'low'].map(option => ({
-								value: option,
-								label: option,
-							}))}
-							onChange={field.onChange}
-							value={field.value || ''}
-						/>
-					)}
-				/>
-			</Box>
-			<Box className={styles.deleteButton}>
-				<IconButton onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}>
-					{isDeletePending ? <CircularProgress size={15} /> : <Delete />}
-				</IconButton>
-			</Box>
+		<Box className={`${styles.listRow} ${isCompleted ? styles.completed : ''}`}>
+			<IconButton aria-label="Drag Handle">
+				<DragIndicator />
+			</IconButton>
+
+			<Controller
+				control={control}
+				name="isCompleted"
+				render={({ field }) => (
+					<Checkbox onChange={field.onChange} checked={field.value} />
+				)}
+			/>
+			<TextField
+				{...register('name')}
+				variant="outlined"
+				// fullWidth
+				label="Task Name"
+				size="small"
+				style={{ display: 'block' }} 
+			/>
+
+			<Controller
+				control={control}
+				name='createdAt'
+				render={({ field: { onChange, value, ...restField } }) => (
+				<TextField
+					{...restField}
+					type="date"
+					label="Due Date"
+					InputLabelProps={{ shrink: true }}
+					variant="outlined"
+					size="small"
+					value={value ? dayjs(value).format('YYYY-MM-DD') : ''}
+					onChange={(e) => {
+						const dateValue = e.target.value;
+						const isoDate = dateValue ? dayjs(dateValue).toISOString() : '';
+						onChange(isoDate);
+					}}
+					/>
+				)}
+			/>  
+			<Controller
+				name="priority"
+				control={control}
+				render={({ field }) => (
+				<FormControl variant="outlined" size="small" style={{ display: 'block' }} >
+					<InputLabel >Priority</InputLabel>
+					<Select
+						labelId="priority-label"
+						label="Priority"
+						{...field}
+						onChange={e => field.onChange(e.target.value)}
+					>
+						<MenuItem value="high" style={{ color: theme.palette.error.main }}>High</MenuItem>
+						<MenuItem value="medium" style={{ color: theme.palette.warning.main }}>Medium</MenuItem>
+						<MenuItem value="low" style={{ color: theme.palette.success.main }}>Low</MenuItem>
+					</Select>
+					</FormControl>
+				)}
+			/>
+			
+			<IconButton onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}>
+				{isDeletePending ? <CircularProgress size='small' /> : <Delete />}
+			</IconButton>
 		</Box>
 	);
 }
