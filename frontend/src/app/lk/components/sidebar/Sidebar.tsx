@@ -11,7 +11,7 @@ type SidebarProps = {
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
-	const isMobile = useMediaQuery('(max-width:600px)');
+	const isMobile = useMediaQuery('(max-width:768px)');
 	return (isMobile ?
 			(<div className={className}>
 				<Drawer 

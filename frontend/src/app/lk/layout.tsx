@@ -1,11 +1,10 @@
-import React from 'react';
-import type { ReactNode } from 'react';
-import styles from './layout.module.scss';
+import React from 'react'
+import type { ReactNode } from 'react'
+import styles from './layout.module.scss'
 
-import { Header } from './components/header/Header';
-import { Sidebar } from './components/sidebar/Sidebar';
-import { Footer } from './components/footer/Footer';
-
+import { Header } from './components/header/Header'
+import { Sidebar } from './components/sidebar/Sidebar'
+import { Footer } from './components/footer/Footer'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
 	return (

@@ -4,7 +4,6 @@ import { useMutation } from '@tanstack/react-query'
 import { LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { IconButton } from '@mui/material'
-import { COLORS } from '@/constants/color.constants'
 import styles from './LogoutButton.module.scss';
 
 import { authService } from '@/services/auth.service'
@@ -20,7 +19,6 @@ export function LogoutButton() {
 
 	return (
 		<IconButton
-			sx={{ color: COLORS.tuapeGrayDark }}
 			className={styles.logoutButton}
 			onClick={() => mutate()}
 		>

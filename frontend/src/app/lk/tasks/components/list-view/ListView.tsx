@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import { DragDropContext } from '@hello-pangea/dnd';
 import { Box, Typography } from '@mui/material';

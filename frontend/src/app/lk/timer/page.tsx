@@ -4,7 +4,7 @@ import { Heading } from '@/components/ui/Heading'
 
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 
-import { Pomodoro } from './Pomodoro'
+import { Pomodoro } from './components/Pomodoro'
 
 export const metadata: Metadata = {
 	title: 'Pomodoro timer',

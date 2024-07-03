@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
-import type { ITimerState } from '../timer.types'
+import type { ITimerState } from './timer.types'
 
 import { useLoadSettings } from './useLoadSettings'
 import { pomodoroService } from '@/services/pomodoro.service'

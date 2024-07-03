@@ -1,4 +1,6 @@
-import React, { Dispatch, SetStateAction, useMemo } from 'react';
+"use client"
+
+import React, { Dispatch, SetStateAction } from 'react';
 import { Box, IconButton, CircularProgress, TextField, InputLabel, FormControl, Select, MenuItem, useTheme } from '@mui/material';
 import { DragIndicator, Delete } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';

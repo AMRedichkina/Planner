@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Box } from '@mui/material';
 import { type Dispatch, type SetStateAction } from 'react';
 import { ITaskResponse } from '@/types/task.types';
-import { COLORS } from '@/constants/color.constants'
 
 interface IListAddRowInput {
 	filterDate?: string;
@@ -31,7 +30,7 @@ export function ListAddRowInput({ setItems, filterDate }: IListAddRowInput) {
 			<Button
 				onClick={addRow}
 				variant="text"
-				sx={{ fontStyle: 'italic', opacity: 0.4, fontSize: '0.875rem', color: COLORS.tuapeGrayDark }}
+				sx={{ fontStyle: 'italic', opacity: 0.4, fontSize: '0.875rem' }}
 			>
 				Add task...
 			</Button>

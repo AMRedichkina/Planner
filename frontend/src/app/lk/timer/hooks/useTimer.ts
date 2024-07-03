@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import type { IPomodoroRoundResponse } from '@/types/pomodoro.types'
 
-import type { ITimerState } from '../timer.types'
+import type { ITimerState } from './timer.types'
 
 import { useLoadSettings } from './useLoadSettings'
 
