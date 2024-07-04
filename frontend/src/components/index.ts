@@ -1,5 +1,2 @@
-export { Heading } from './ui/Heading'
-export { Button } from './ui/buttons/Button'
-export { TransparentButton } from './ui/buttons/TransparentButton'
-export { Field } from './ui/fields/Field'
-export { TransparentField } from './ui/fields/TransparentField'
+export { Heading } from '../app/lk/components/ui/Heading'
+export { Field } from '../app/lk/components/ui/Field'

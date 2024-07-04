@@ -2,13 +2,13 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button } from '@/components/ui/buttons/Button'
-import { Field } from '@/components/ui/fields/Field'
+import { Field } from '@/app/lk/components/ui/Field'
 
 import { TypeUserForm } from '@/types/auth.types'
 
 import { useInitialUserData } from './useInitialUserData'
 import { useUpdateUserSettings } from './useUpdateUserSettings'
+import { Box, Button, Grid } from '@mui/material'
 
 export function UserSettings() {
 	const { register, handleSubmit, reset } = useForm<TypeUserForm>({
@@ -29,13 +29,12 @@ export function UserSettings() {
 	}
 
 	return (
-		<div>
+		<Box sx={{ width: '90%', mx: 'auto' }}>
 			<form
-				className='w-2/4'
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<div className='grid grid-cols-2 gap-10'>
-					<div>
+				<Grid container spacing={2}>
+					<Grid item xs={12} md={6} >
 						<Field
 							id='email'
 							label='Email: '
@@ -44,7 +43,6 @@ export function UserSettings() {
 							{...register('email', {
 								required: 'Email is required!'
 							})}
-							extra='mb-4'
 						/>
 
 						<Field
@@ -52,7 +50,6 @@ export function UserSettings() {
 							label='Name: '
 							placeholder='Enter name: '
 							{...register('name')}
-							extra='mb-4'
 						/>
 
 						<Field
@@ -61,10 +58,9 @@ export function UserSettings() {
 							placeholder='Enter password: '
 							type='password'
 							{...register('password')}
-							extra='mb-10'
 						/>
-					</div>
-				</div>
+					</Grid>
+				</Grid>
 
 				<Button
 					type='submit'
@@ -74,6 +70,6 @@ export function UserSettings() {
 				</Button>
 
 			</form>
-		</div>
+		</Box>
 	)
 }

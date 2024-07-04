@@ -16,7 +16,7 @@ export const KanbanView = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Box sx={{ display: 'flex', overflowX: 'auto' }}>
+      <Box sx={{ display: 'flex' }}>
         {COLUMNS.map(column => (
           <KanbanColumn
             key={column.value}

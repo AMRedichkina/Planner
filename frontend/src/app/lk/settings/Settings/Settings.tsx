@@ -2,13 +2,13 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { Button } from '@/components/ui/buttons/Button'
-import { Field } from '@/components/ui/fields/Field'
+import { Field } from '@/app/lk/components/ui/Field'
 
 import { ISettings } from '@/types/settings.types'
 
 import { useInitialData } from './useInitialData'
 import { useUpdateSettings } from './useUpdateSettings'
+import { Box, Button, Grid } from '@mui/material'
 
 export function Settings() {
 	const { register, handleSubmit, reset } = useForm<ISettings>({
@@ -27,13 +27,12 @@ export function Settings() {
 	}
 
 	return (
-		<div>
+		<Box sx={{width:'90%', mx:'auto'}}>
 			<form
-				className='w-2/4'
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<div className='grid grid-cols-2 gap-10'>
-					<div>
+				<Grid container spacing={2}>
+					<Grid item xs={12} md={6}>
 						<Field
 							id='workInterval'
 							label='Work interval (min.): '
@@ -53,7 +52,6 @@ export function Settings() {
 							{...register('breakInterval', {
 								valueAsNumber: true
 							})}
-							extra='mb-4'
 						/>
 
 						<Field
@@ -64,10 +62,9 @@ export function Settings() {
 							{...register('intervalCount', {
 								valueAsNumber: true
 							})}
-							extra='mb-6'
 						/>
-					</div>
-				</div>
+					</Grid>
+				</Grid>
 
 				<Button
 					type='submit'
@@ -76,6 +73,6 @@ export function Settings() {
 					Save
 				</Button>
 			</form>
-		</div>
+		</Box>
 	)
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Auth } from './Auth'
+import { Auth } from './components/Auth'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 
 

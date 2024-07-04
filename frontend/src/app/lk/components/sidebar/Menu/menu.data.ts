@@ -27,11 +27,6 @@ export const MENU: IMenuItem[] = [
 		name: 'Pomodoro'
 	},
 	{
-		icon: CalendarIcon,
-		link: DASHBOARD_PAGES.TIME_BLOCKING,
-		name: 'Time blocking'
-	},
-	{
 		icon: SettingsIcon,
 		link: DASHBOARD_PAGES.SETTINGS,
 		name: 'Settings'

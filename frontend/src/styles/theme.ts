@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-export const lightTheme = createTheme({
+let lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
@@ -34,9 +34,54 @@ export const lightTheme = createTheme({
             fontWeight: 400,
         },
     },
+    components: {
+        MuiPaper: {
+            styleOverrides: {
+              root: {
+                overflow: 'visible',
+              },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: '8px',
+                    paddingY: '8px',
+                    paddingX: '28px',
+                    fontSize: '1rem',
+                    fontWeight: '500',
+                    color: '#FFFFFF',
+                    marginBottom: '12px',
+                    transition: 'background-color 0.3s',
+                    '&:hover': {
+                        backgroundColor: '#1976D2',
+                    },
+                    '&:active': {
+                        backgroundColor: '#0056b3',
+                    },
+                },
+                text: {
+                    color: 'inherit',
+                    boxShadow: 'none',
+                    backgroundColor: 'transparent',
+                    '&:hover': {
+                        backgroundColor: 'transparent',
+                        textDecoration: 'underline'
+                    },
+                    '&:active': {
+                        backgroundColor: 'transparent'
+                    }
+                }
+            }
+        }
+    }
 });
 
-export const darkTheme = createTheme({
+lightTheme = responsiveFontSizes(lightTheme, {
+    breakpoints: ['xs', 'sm', 'md', 'lg', 'xl'],
+  });
+
+let darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
@@ -60,4 +105,12 @@ export const darkTheme = createTheme({
         },
     },
     typography: lightTheme.typography,
+    components: lightTheme.components,
 });
+
+
+darkTheme = responsiveFontSizes(darkTheme, {
+    breakpoints: ['xs', 'sm', 'md', 'lg', 'xl'],
+  });
+
+export { lightTheme, darkTheme };

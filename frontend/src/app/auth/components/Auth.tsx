@@ -5,15 +5,15 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Container, IconButton, InputAdornment } from '@mui/material';
+import { Container, IconButton, InputAdornment, Button } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { toast } from 'sonner';
 import { IAuthForm } from '@/types/auth.types';
 import { DASHBOARD_PAGES } from '@/configs/pages-url.config';
 import { authService } from '@/services/auth.service';
-import { validationSchema } from '../../validation/validationSchema';
+import { validationSchema } from '../../../validation/validationSchema';
 import ThemeProvider from '@/components/ThemeProvider';
-import { Button, TransparentButton, Field, Heading } from '@/components';
+import { Field, Heading } from '@/components';
 import { StyledPaper, StyledBox, FormBox } from './AuthStyles';
 
 
@@ -119,9 +119,9 @@ export function Auth() {
 
 							<FormBox>
 								<Button type='submit'>{isLoginForm ? 'Login' : 'Register'}</Button>
-								<TransparentButton type='button' onClick={() => setIsLoginForm(!isLoginForm)}>
+								<Button variant='text' type='button' onClick={() => setIsLoginForm(!isLoginForm)}>
 									{isLoginForm ? 'Switch to Register' : 'Switch to Login'}
-								</TransparentButton>
+								</Button>
 							</FormBox>
 						</form>
 					</StyledPaper>

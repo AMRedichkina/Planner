@@ -1,14 +1,14 @@
 "use client"
 
 import React from 'react'
-import { useEffect, type Dispatch, type SetStateAction } from 'react'
+import { type Dispatch, type SetStateAction } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import type { ITaskResponse, TypeTaskFormState } from '@/types/task.types'
 import { Card, CardContent, Checkbox, FormControl, FormControlLabel, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
-import dayjs from 'dayjs';
-import { useTheme } from '@mui/material/styles';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import dayjs from 'dayjs'
+import { useTheme } from '@mui/material/styles'
 import { useDeleteTask } from '../../hooks/useDeleteTask'
 import { useTaskDebounce } from '../../hooks/useTaskDebounce'
 
@@ -19,10 +19,6 @@ interface IKanbanCard {
 
 export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
   const theme = useTheme();
-
-	useEffect(() => {
-		console.log('KanbanCard re-rendered', item);
-	}, [item]);
 
 	const { register, control, watch } = useForm<TypeTaskFormState>({
 		defaultValues: {
@@ -48,7 +44,8 @@ export const KanbanCard = ({ item, setItems }: IKanbanCard) => {
 
           <IconButton
             aria-label="delete"
-            onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}              sx={{ marginLeft: 'auto' }}
+            onClick={() => item.id ? deleteTask(item.id) : setItems(prev => prev?.slice(0, -1))}              
+            sx={{ marginLeft: 'auto' }}
           >
             <DeleteOutlineIcon />
           </IconButton>
