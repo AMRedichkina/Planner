@@ -1,6 +1,7 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-let lightTheme = createTheme({
+// Define the base theme configuration for light mode
+let baseTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
@@ -15,8 +16,8 @@ let lightTheme = createTheme({
             main: '#D32F2F',
         },
         background: {
-            default: '#F5F5F5',
-            paper: '#FFFFFF',
+            default: '#FFFFFF',
+            paper: '#F5F5F5',
         },
         text: {
             primary: '#212121',
@@ -29,6 +30,13 @@ let lightTheme = createTheme({
             fontSize: '2.4rem',
             fontWeight: 500,
         },
+        h6: {
+            fontSize: '1.0rem',
+            fontWeight: 'bold',
+            color: '#5e6c84',
+            textAlign: 'left',
+            padding: '16px',
+        },
         body1: {
             fontSize: '1rem',
             fontWeight: 400,
@@ -37,9 +45,9 @@ let lightTheme = createTheme({
     components: {
         MuiPaper: {
             styleOverrides: {
-              root: {
-                overflow: 'visible',
-              },
+                root: {
+                    overflow: 'visible',
+                },
             },
         },
         MuiButton: {
@@ -73,15 +81,35 @@ let lightTheme = createTheme({
                     }
                 }
             }
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    maxWidth: 300,
+                    margin: '8px',
+                    boxShadow: '0px 1px 4px rgba(9, 30, 66, 0.25)',
+                    overflow: 'hidden',
+                    border: '1px solid #dfe1e6',
+                    borderRadius: '3px',
+                    backgroundColor: '#ffffff',
+                    '@media (max-width:600px)': {
+                        maxWidth: '100%',
+                        margin: '4px',
+                        boxShadow: '0px 0px 2px rgba(9, 30, 66, 0.25)'
+                    }
+                }
+            }
         }
     }
 });
 
-lightTheme = responsiveFontSizes(lightTheme, {
+// Make light theme responsive
+let lightTheme = responsiveFontSizes(baseTheme, {
     breakpoints: ['xs', 'sm', 'md', 'lg', 'xl'],
-  });
+});
 
-let darkTheme = createTheme({
+// Define dark theme based on the light theme but with specific overrides for dark mode
+let darkTheme = createTheme(baseTheme, {
     palette: {
         mode: 'dark',
         primary: {
@@ -104,13 +132,41 @@ let darkTheme = createTheme({
             secondary: '#BDBDBD',
         },
     },
-    typography: lightTheme.typography,
-    components: lightTheme.components,
+    components: {
+        ...baseTheme.components,
+        MuiButton: {
+            ...baseTheme.components.MuiButton,
+            styleOverrides: {
+                ...baseTheme.components.MuiButton.styleOverrides,
+                root: {
+                    ...baseTheme.components.MuiButton.styleOverrides.root,
+                    color: '#E0E0E0',
+                    '&:hover': {
+                        backgroundColor: '#1565C0',
+                    },
+                    '&:active': {
+                        backgroundColor: '#0D47A1',
+                    },
+                }
+            }
+        },
+        MuiCard: {
+            ...baseTheme.components.MuiCard,
+            styleOverrides: {
+                ...baseTheme.components.MuiCard.styleOverrides,
+                root: {
+                    ...baseTheme.components.MuiCard.styleOverrides.root,
+                    backgroundColor: '#333333',
+                    border: '1px solid #424242',
+                }
+            }
+        }
+    }
 });
 
-
+// Make dark theme responsive
 darkTheme = responsiveFontSizes(darkTheme, {
     breakpoints: ['xs', 'sm', 'md', 'lg', 'xl'],
-  });
+});
 
 export { lightTheme, darkTheme };

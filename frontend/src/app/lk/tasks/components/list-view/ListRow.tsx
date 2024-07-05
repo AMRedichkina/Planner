@@ -4,13 +4,11 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Box, IconButton, CircularProgress, TextField, InputLabel, FormControl, Select, MenuItem, Checkbox, useTheme } from '@mui/material';
 import { DragIndicator, Delete } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
-// import Checkbox from '@/components/ui/checkbox';
 import dayjs from 'dayjs';
 import { ITaskResponse, TypeTaskFormState } from '@/types/task.types';
 import { useDeleteTask } from '../../hooks/useDeleteTask';
 import { useTaskDebounce } from '../../hooks/useTaskDebounce';
 import styles from './ListRow.module.scss';
-import { EnumTaskPriority } from '@/types/task.types'
 
 interface IListRow {
 	item: ITaskResponse;
@@ -25,7 +23,7 @@ export function ListRow({ item, setItems }: IListRow) {
 			name: item.name,
 			isCompleted: item.isCompleted,
 			createdAt: item.createdAt,
-			priority: item.priority || EnumTaskPriority.low,
+			priority: item.priority || 'low',
 		},
 	});
 
